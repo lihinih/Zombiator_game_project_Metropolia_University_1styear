@@ -8,11 +8,16 @@ connection = mysql.connector.connect(
         password="Bu@1234#Li",
         autocommit=True
     )
+countries = []
+sql1 = "SELECT country FROM airport"
+cursor = connection.cursor()
+cursor.execute(sql1)
+result1 = cursor.fetchall()
+countries = result1
 
-def get_dict_airportcoordinate_by_country():
+def get_dict_airportcoordinate_by_country(country):
     dict_airport_coordinate = {}
     sql = "SELECT country, latitude_deg, longitude_deg FROM airport"
-
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
@@ -21,8 +26,5 @@ def get_dict_airportcoordinate_by_country():
             coordinate = (row[1], row[2])
             dict_airport_coordinate[row[0]] = coordinate
     return dict_airport_coordinate
-
-
-
 
 
